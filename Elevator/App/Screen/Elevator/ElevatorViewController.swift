@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ElevatorViewController.swift
 //  Elevator
 //
 //  Created by Thanapat Sorralump on 10/3/2562 BE.
@@ -8,13 +8,11 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+final class ElevatorViewController: UIViewController, NibLoader {
+    typealias NibRootType = ElevatorViewController
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        view.backgroundColor = .blue
     }
-
-
 }
-
