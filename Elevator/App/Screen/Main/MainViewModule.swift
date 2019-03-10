@@ -18,5 +18,5 @@ protocol MainViewOutput {
 }
 
 protocol MainViewRouterInput {
-    func navigateToElevator()
+    func navigateToElevator(with floor: Int)
 }

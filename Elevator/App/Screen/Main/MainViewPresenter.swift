@@ -15,14 +15,14 @@ final class MainViewPresenter: MainViewOutput {
     private var floorNumber: Int?
     
     func tapSelectFloor() {
-        guard floorNumber != nil else {
+        guard let floorNumber = floorNumber else {
             let alert = UIAlertController(title: "Error", message: "ใส่จำนวนชั้นให้ถูกต้อง", preferredStyle: .alert)
             let action = UIAlertAction(title: "เค", style: .default, handler: nil)
             alert.addAction(action)
             view?.showAlert(alert)
             return
         }
-        router?.navigateToElevator()
+        router?.navigateToElevator(with: floorNumber)
     }
     
     func updateFloor(to number: String?) {

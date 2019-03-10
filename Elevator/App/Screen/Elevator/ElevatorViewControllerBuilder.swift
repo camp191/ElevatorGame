@@ -9,14 +9,20 @@
 import UIKit
 
 protocol ElevatorViewControllerBuildable {
-    func build() -> UIViewController
+    func build(with floor: Int) -> UIViewController
 }
 
 final class ElevatorViewControllerBuilder: ElevatorViewControllerBuildable {
-    func build() -> UIViewController {
+    func build(with floor: Int) -> UIViewController {
         guard let viewController = try? ElevatorViewController.loadFromNib() else {
             fatalError("Could not load nib")
         }
+        
+        let presenter = ElevatorViewPresenter(with: floor)
+        
+        viewController.output = presenter
+        
+        presenter.view = viewController
         
         return viewController
     }
