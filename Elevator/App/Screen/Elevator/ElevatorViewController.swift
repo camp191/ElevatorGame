@@ -18,6 +18,7 @@ final class ElevatorViewController: UIViewController, NibLoader {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        output?.viewIsReady()
         setupTableViewCell()
     }
     
@@ -68,8 +69,11 @@ extension ElevatorViewController: UITableViewDataSource {
 }
 
 extension ElevatorViewController: ElevatorViewInput {
+    func setFloorLabel(with text: String?) {
+        currentFloor.text = text
+    }
+    
     func reloadTableViewRow(indexPaths: [IndexPath]) {
-        currentFloor.text = output?.getCurrentElevatorFloor()
         tableView.reloadRows(at: indexPaths, with: .none)
     }
 }

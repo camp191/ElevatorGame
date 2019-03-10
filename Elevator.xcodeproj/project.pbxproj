@@ -11,6 +11,7 @@
 		D06FFB4D223511F10025231B /* ElevatorViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06FFB4C223511F10025231B /* ElevatorViewPresenter.swift */; };
 		D06FFB50223518410025231B /* ElevatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06FFB4F223518410025231B /* ElevatorCell.swift */; };
 		D06FFB522235184C0025231B /* ElevatorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D06FFB512235184C0025231B /* ElevatorCell.xib */; };
+		D06FFB55223539B20025231B /* Floor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06FFB54223539B20025231B /* Floor.swift */; };
 		D09503D522349372000C0B62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09503D422349372000C0B62 /* AppDelegate.swift */; };
 		D09503DC22349373000C0B62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D09503DB22349373000C0B62 /* Assets.xcassets */; };
 		D09503DF22349373000C0B62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D09503DD22349373000C0B62 /* LaunchScreen.storyboard */; };
@@ -34,6 +35,7 @@
 		D06FFB4C223511F10025231B /* ElevatorViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevatorViewPresenter.swift; sourceTree = "<group>"; };
 		D06FFB4F223518410025231B /* ElevatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevatorCell.swift; sourceTree = "<group>"; };
 		D06FFB512235184C0025231B /* ElevatorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ElevatorCell.xib; sourceTree = "<group>"; };
+		D06FFB54223539B20025231B /* Floor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Floor.swift; sourceTree = "<group>"; };
 		D09503D122349372000C0B62 /* Elevator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Elevator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D09503D422349372000C0B62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D09503DB22349373000C0B62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -74,6 +76,14 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		D06FFB53223539A90025231B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D06FFB54223539B20025231B /* Floor.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		D09503C822349371000C0B62 = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +118,7 @@
 		D09503E6223495A8000C0B62 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				D06FFB53223539A90025231B /* Model */,
 				D09503E8223495C3000C0B62 /* Helper */,
 				D09503E7223495B2000C0B62 /* Screen */,
 			);
@@ -238,6 +249,7 @@
 				D09503EA223495D0000C0B62 /* NibLoader.swift in Sources */,
 				D09503EE22349704000C0B62 /* RootRouter.swift in Sources */,
 				D09503FA22349C2F000C0B62 /* MainViewModule.swift in Sources */,
+				D06FFB55223539B20025231B /* Floor.swift in Sources */,
 				D06FFB50223518410025231B /* ElevatorCell.swift in Sources */,
 				D09503EC2234966E000C0B62 /* AppDelegateHelper.swift in Sources */,
 				D06FFB4B223511BD0025231B /* ElevatorViewModule.swift in Sources */,

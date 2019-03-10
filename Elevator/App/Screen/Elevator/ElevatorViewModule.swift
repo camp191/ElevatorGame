@@ -10,9 +10,11 @@ import UIKit
 
 protocol ElevatorViewInput: class {
     func reloadTableViewRow(indexPaths: [IndexPath])
+    func setFloorLabel(with text: String?)
 }
 
 protocol ElevatorViewOutput {
+    func viewIsReady()
     func getCurrentElevatorFloor() -> String
     func getLastFloorIndexPath() -> IndexPath
     func getFloorCount() -> Int
