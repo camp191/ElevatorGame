@@ -10,40 +10,42 @@ import UIKit
 
 final class ElevatorViewPresenter: ElevatorViewOutput {
     weak var view: ElevatorViewInput?
-    
-    var floors: Int = 0
-    var currentElevatorFloorIndex: Int = 0
-    var selectedFloorIndex: Int = 0
+    var router: ElevatorRouterInput?
+    var interactor: ElevatorViewInteractorInput?
     
     var timer = Timer()
     var isTimerValidate = false
     
-    init(with floor: Int) {
-        self.floors = floor
+    func viewIsReady() {
+        view?.setFloorLabel(with: "\(interactor?.getCurrentFloorIndex() ?? 0 + 1)")
     }
     
-    func viewIsReady() {
-        view?.setFloorLabel(with: "\(currentElevatorFloorIndex + 1)")
+    func tapSelectFloor(from floorIndex: Int) {
+        router?.navigate(to: floorIndex)
     }
     
     func getFloorCount() -> Int {
-        return floors
+        return interactor?.getFloorCount() ?? 0
     }
     
     func getFloor(index: Int) -> Floor {
         let floorNumber = index + 1
-        let isArrive = index == currentElevatorFloorIndex
-        let isSelected = index == selectedFloorIndex && selectedFloorIndex != currentElevatorFloorIndex
+        let selectedFloorIndex = interactor?.getSelectedFloor() ?? 0
+        let currentFloorIndex = interactor?.getCurrentFloorIndex() ?? 0
+        
+        let isArrive = index == currentFloorIndex
+        let isSelected = index ==  selectedFloorIndex && selectedFloorIndex != currentFloorIndex
         
         return Floor(number: floorNumber, isSelected: isSelected, isArrived: isArrive)
     }
     
     func getCurrentElevatorFloor() -> String {
-        return "\(currentElevatorFloorIndex)"
+        return "\(interactor?.getCurrentFloorIndex() ?? 0)"
     }
     
     func getLastFloorIndexPath() -> IndexPath {
-        return IndexPath(row: floors - 1, section: 0)
+        let floorCount = interactor?.getFloorCount() ?? 0
+        return IndexPath(row: floorCount - 1, section: 0)
     }
     
     func invalidateTimer() {
@@ -53,10 +55,10 @@ final class ElevatorViewPresenter: ElevatorViewOutput {
     
     func selectRow(index: Int) {
         var indexPathsToReload: [IndexPath] = []
-        indexPathsToReload.append(IndexPath(row: selectedFloorIndex, section: 0))
+        indexPathsToReload.append(IndexPath(row: interactor?.getSelectedFloor() ?? 0, section: 0))
         
-        selectedFloorIndex = index
-        indexPathsToReload.append(IndexPath(row: selectedFloorIndex, section: 0))
+        interactor?.setSelectedFloor(index: index)
+        indexPathsToReload.append(IndexPath(row: interactor?.getSelectedFloor() ?? 0, section: 0))
         
         view?.reloadTableViewRow(indexPaths: indexPathsToReload)
         shouldSetupNewTimer()
@@ -65,25 +67,27 @@ final class ElevatorViewPresenter: ElevatorViewOutput {
     @objc func updateElevator() {
         var indexPathsToReload: [IndexPath] = []
         
-        indexPathsToReload.append(IndexPath(row: currentElevatorFloorIndex, section: 0))
+        indexPathsToReload.append(IndexPath(row: interactor?.getCurrentFloorIndex() ?? 0, section: 0))
         
         setCurrentFloorIndex()
         
-        indexPathsToReload.append(IndexPath(row: currentElevatorFloorIndex, section: 0))
+        indexPathsToReload.append(IndexPath(row: interactor?.getCurrentFloorIndex() ?? 0, section: 0))
         
-        view?.setFloorLabel(with: "\(currentElevatorFloorIndex + 1)")
+        view?.setFloorLabel(with: "\(interactor?.getCurrentFloorIndex() ?? 0 + 1)")
         view?.reloadTableViewRow(indexPaths: indexPathsToReload)
     }
     
     func setCurrentFloorIndex() {
+        let currentElevatorFloorIndex = interactor?.getCurrentFloorIndex() ?? 0
+        let selectedFloorIndex = interactor?.getSelectedFloor() ?? 0
         if currentElevatorFloorIndex == selectedFloorIndex {
             invalidateTimer()
         }
         else if currentElevatorFloorIndex > selectedFloorIndex {
-            currentElevatorFloorIndex -= 1
+            interactor?.setCurrentFloor(index: currentElevatorFloorIndex - 1)
         }
         else if currentElevatorFloorIndex < selectedFloorIndex {
-            currentElevatorFloorIndex += 1
+            interactor?.setCurrentFloor(index: currentElevatorFloorIndex + 1)
         }
     }
     

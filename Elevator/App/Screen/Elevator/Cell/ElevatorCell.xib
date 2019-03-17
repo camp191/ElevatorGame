@@ -49,6 +49,9 @@
                                     <constraint firstAttribute="width" constant="40" id="US8-gK-bzX"/>
                                 </constraints>
                                 <state key="normal" title="&gt;"/>
+                                <connections>
+                                    <action selector="goToFloor:" destination="Osl-cD-Wkh" eventType="touchUpInside" id="Wbj-ds-bOr"/>
+                                </connections>
                             </button>
                         </subviews>
                     </stackView>

@@ -21,4 +21,17 @@ protocol ElevatorViewOutput {
     func getFloor(index: Int) -> Floor
     func selectRow(index: Int)
     func invalidateTimer()
+    func tapSelectFloor(from floorIndex: Int)
+}
+
+protocol ElevatorRouterInput {
+    func navigate(to floor: Int)
+}
+
+protocol ElevatorViewInteractorInput {
+    func getFloorCount() -> Int
+    func setCurrentFloor(index: Int)
+    func getCurrentFloorIndex() -> Int
+    func setSelectedFloor(index: Int)
+    func getSelectedFloor() -> Int
 }

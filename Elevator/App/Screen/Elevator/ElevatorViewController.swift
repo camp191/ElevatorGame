@@ -22,11 +22,6 @@ final class ElevatorViewController: UIViewController, NibLoader {
         setupTableViewCell()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        output?.invalidateTimer()
-    }
-    
     func setupTableViewCell() {
         tableView.register(
             UINib(nibName: String(describing: ElevatorCell.self), bundle: nil),
@@ -63,7 +58,7 @@ extension ElevatorViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(
                                 withIdentifier: String(describing: ElevatorCell.self),
                                 for: indexPath) as! ElevatorCell
-        cell.configure(with: output?.getFloor(index: indexPath.row))
+        cell.configure(with: output?.getFloor(index: indexPath.row), delegate: self)
         return cell
     }
 }
@@ -75,5 +70,11 @@ extension ElevatorViewController: ElevatorViewInput {
     
     func reloadTableViewRow(indexPaths: [IndexPath]) {
         tableView.reloadRows(at: indexPaths, with: .none)
+    }
+}
+
+extension ElevatorViewController: ElevatorCellDelegate {
+    func openFloor(number: Int) {
+        output?.tapSelectFloor(from: number)
     }
 }

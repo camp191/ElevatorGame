@@ -8,15 +8,30 @@
 
 import UIKit
 
+protocol ElevatorCellDelegate: class {
+    func openFloor(number: Int)
+}
+
 final class ElevatorCell: UITableViewCell {
     @IBOutlet weak var lblFloor: UILabel!
     @IBOutlet weak var vSelect: UIView!
     @IBOutlet weak var vElevator: UIView!
     
-    func configure(with floor: Floor?) {
+    weak var delegate: ElevatorCellDelegate?
+    private var floor: Floor?
+    
+    func configure(with floor: Floor?, delegate: ElevatorCellDelegate?) {
+        self.floor = floor
+        self.delegate = delegate
+        
         guard let floor = floor else { return }
         vSelect.backgroundColor = floor.isSelected ? .brown : .white
         vElevator.backgroundColor = floor.isArrived ? .cyan : .white
         lblFloor.text = "\(floor.number)"
+    }
+    
+    @IBAction func goToFloor(_ sender: UIButton) {
+        guard let floor = floor else { return }
+        delegate?.openFloor(number: floor.number)
     }
 }

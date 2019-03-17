@@ -18,11 +18,19 @@ final class ElevatorViewControllerBuilder: ElevatorViewControllerBuildable {
             fatalError("Could not load nib")
         }
         
-        let presenter = ElevatorViewPresenter(with: floor)
+        let presenter = ElevatorViewPresenter()
+        let router = ElevatorViewRouter()
+        let interactor = ElevatorViewInteractor(
+                                floorCount: floor,
+                                elevatorManager: ElevatorManagerImplementation())
         
         viewController.output = presenter
         
         presenter.view = viewController
+        presenter.router = router
+        presenter.interactor = interactor
+        
+        router.viewController = viewController
         
         return viewController
     }
