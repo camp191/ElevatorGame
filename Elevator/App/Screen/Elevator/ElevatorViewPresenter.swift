@@ -11,7 +11,7 @@ import UIKit
 final class ElevatorViewPresenter: ElevatorViewOutput {
     weak var view: ElevatorViewInput?
     
-    var floors: [Floor] = []
+    var floors: Int = 0
     var currentElevatorFloorIndex: Int = 0
     var selectedFloorIndex: Int = 0
     
@@ -19,11 +19,7 @@ final class ElevatorViewPresenter: ElevatorViewOutput {
     var isTimerValidate = false
     
     init(with floor: Int) {
-        for num in 1...floor {
-            floors.append(
-                Floor(number: num, isSelected: false, isArrived: num == 1)
-            )
-        }
+        self.floors = floor
     }
     
     func viewIsReady() {
@@ -31,11 +27,15 @@ final class ElevatorViewPresenter: ElevatorViewOutput {
     }
     
     func getFloorCount() -> Int {
-        return floors.count
+        return floors
     }
     
     func getFloor(index: Int) -> Floor {
-        return floors[index]
+        let floorNumber = index + 1
+        let isArrive = index == currentElevatorFloorIndex
+        let isSelected = index == selectedFloorIndex && selectedFloorIndex != currentElevatorFloorIndex
+        
+        return Floor(number: floorNumber, isSelected: isSelected, isArrived: isArrive)
     }
     
     func getCurrentElevatorFloor() -> String {
@@ -43,7 +43,7 @@ final class ElevatorViewPresenter: ElevatorViewOutput {
     }
     
     func getLastFloorIndexPath() -> IndexPath {
-        return IndexPath(row: floors.count - 1, section: 0)
+        return IndexPath(row: floors - 1, section: 0)
     }
     
     func invalidateTimer() {
@@ -53,21 +53,9 @@ final class ElevatorViewPresenter: ElevatorViewOutput {
     
     func selectRow(index: Int) {
         var indexPathsToReload: [IndexPath] = []
-        setupFloorDataToArray(
-            index: selectedFloorIndex,
-            floorData: floors[selectedFloorIndex],
-            isSelected: false,
-            isArrived: nil
-        )
         indexPathsToReload.append(IndexPath(row: selectedFloorIndex, section: 0))
         
         selectedFloorIndex = index
-        setupFloorDataToArray(
-            index: selectedFloorIndex,
-            floorData: floors[selectedFloorIndex],
-            isSelected: true,
-            isArrived: nil
-        )
         indexPathsToReload.append(IndexPath(row: selectedFloorIndex, section: 0))
         
         view?.reloadTableViewRow(indexPaths: indexPathsToReload)
@@ -77,22 +65,10 @@ final class ElevatorViewPresenter: ElevatorViewOutput {
     @objc func updateElevator() {
         var indexPathsToReload: [IndexPath] = []
         
-        setupFloorDataToArray(
-            index: currentElevatorFloorIndex,
-            floorData: floors[currentElevatorFloorIndex],
-            isSelected: nil,
-            isArrived: false
-        )
         indexPathsToReload.append(IndexPath(row: currentElevatorFloorIndex, section: 0))
         
         setCurrentFloorIndex()
         
-        setupFloorDataToArray(
-            index: currentElevatorFloorIndex,
-            floorData: floors[currentElevatorFloorIndex],
-            isSelected: nil,
-            isArrived: true
-        )
         indexPathsToReload.append(IndexPath(row: currentElevatorFloorIndex, section: 0))
         
         view?.setFloorLabel(with: "\(currentElevatorFloorIndex + 1)")
@@ -109,12 +85,6 @@ final class ElevatorViewPresenter: ElevatorViewOutput {
         else if currentElevatorFloorIndex < selectedFloorIndex {
             currentElevatorFloorIndex += 1
         }
-    }
-    
-    func setupFloorDataToArray(index: Int, floorData: Floor, isSelected: Bool? = nil, isArrived: Bool? = nil) {
-        let isSelect = isSelected != nil ? isSelected! : floorData.isSelected
-        let isArrive = isArrived != nil ? isArrived! : floorData.isArrived
-        floors[index] = Floor(number: floorData.number, isSelected: isSelect, isArrived: isArrive)
     }
     
     func shouldSetupNewTimer() {

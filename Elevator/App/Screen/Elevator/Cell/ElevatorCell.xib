@@ -32,16 +32,24 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0eK-p2-1Ba">
-                                <rect key="frame" x="32" y="0.0" width="291" height="63.5"/>
+                                <rect key="frame" x="32" y="0.0" width="249" height="63.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0XD-er-lVo">
-                                <rect key="frame" x="325" y="0.0" width="50" height="63.5"/>
+                                <rect key="frame" x="283" y="0.0" width="50" height="63.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="y5n-MB-7sS"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HWN-Da-Xez">
+                                <rect key="frame" x="335" y="0.0" width="40" height="63.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="US8-gK-bzX"/>
+                                </constraints>
+                                <state key="normal" title="&gt;"/>
+                            </button>
                         </subviews>
                     </stackView>
                 </subviews>
