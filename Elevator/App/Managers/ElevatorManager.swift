@@ -13,10 +13,27 @@ protocol ElevatorManager {
     var currentElevatorFloorIndex: Int { get }
     var selectedFloorIndex: Int { get }
     var floorTimeStampFromIndex: [Int: [TimeInterval]] { get }
+    var subscribers: [ElevatorManagerSubscribe] { get }
+    
+    func add(subscriber: ElevatorManagerSubscribe)
     
     func setFloorCount(number: Int)
     func setCurrentFloor(index: Int)
     func setSelectedFloor(index: Int)
+    
+    func setupTimerIfNeeded()
+    func invalidTimer()
+}
+
+protocol ElevatorManagerSubscribe: class {
+    func trigger()
+}
+
+struct ElevatorManagerSubscriber {
+    weak var subscriber: ElevatorManagerSubscribe?
+    init (subscriber: ElevatorManagerSubscribe) {
+        self.subscriber = subscriber
+    }
 }
 
 final class ElevatorManagerImplementation: ElevatorManager {
@@ -24,10 +41,19 @@ final class ElevatorManagerImplementation: ElevatorManager {
     private(set) var currentElevatorFloorIndex: Int = 0
     private(set) var selectedFloorIndex: Int = 0
     private(set) var floorTimeStampFromIndex: [Int: [TimeInterval]] = [:]
-//
-//    init(timerService: TimerService) {
-//
-//    }
+    
+    private let timerService: TimerService
+    
+    private(set) var subscribers: [ElevatorManagerSubscribe] = []
+
+    init(timerService: TimerService) {
+        self.timerService = timerService
+        timerService.setup(delegate: self)
+    }
+    
+    func add(subscriber: ElevatorManagerSubscribe) {
+        subscribers.append(subscriber)
+    }
     
     func setFloorCount(number: Int) {
         floors = number
@@ -40,8 +66,20 @@ final class ElevatorManagerImplementation: ElevatorManager {
     func setSelectedFloor(index: Int) {
         selectedFloorIndex = index
     }
+    
+    func setupTimerIfNeeded() {
+        timerService.shouldSetupNewTimer()
+    }
+    
+    func invalidTimer() {
+        timerService.invalidateTimer()
+    }
 }
-//
-//final class TimerService {
-//    
-//}
+
+extension ElevatorManagerImplementation: TimerServiceDelegate {
+    func trigger() {
+        subscribers.forEach { (subscriber) in
+            subscriber.trigger()
+        }
+    }
+}

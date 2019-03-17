@@ -17,6 +17,7 @@
 		D01DEFAB223E4532002163BB /* FloorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D01DEFAA223E4532002163BB /* FloorCell.xib */; };
 		D01DEFAE223E4D37002163BB /* ElevatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01DEFAD223E4D37002163BB /* ElevatorManager.swift */; };
 		D01DEFB0223E5333002163BB /* ElevatorViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01DEFAF223E5333002163BB /* ElevatorViewInteractor.swift */; };
+		D01DEFB2223E5A7E002163BB /* TimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01DEFB1223E5A7E002163BB /* TimerService.swift */; };
 		D06FFB4B223511BD0025231B /* ElevatorViewModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06FFB4A223511BD0025231B /* ElevatorViewModule.swift */; };
 		D06FFB4D223511F10025231B /* ElevatorViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06FFB4C223511F10025231B /* ElevatorViewPresenter.swift */; };
 		D06FFB50223518410025231B /* ElevatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06FFB4F223518410025231B /* ElevatorCell.swift */; };
@@ -51,6 +52,7 @@
 		D01DEFAA223E4532002163BB /* FloorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FloorCell.xib; sourceTree = "<group>"; };
 		D01DEFAD223E4D37002163BB /* ElevatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevatorManager.swift; sourceTree = "<group>"; };
 		D01DEFAF223E5333002163BB /* ElevatorViewInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevatorViewInteractor.swift; sourceTree = "<group>"; };
+		D01DEFB1223E5A7E002163BB /* TimerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerService.swift; sourceTree = "<group>"; };
 		D06FFB4A223511BD0025231B /* ElevatorViewModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevatorViewModule.swift; sourceTree = "<group>"; };
 		D06FFB4C223511F10025231B /* ElevatorViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevatorViewPresenter.swift; sourceTree = "<group>"; };
 		D06FFB4F223518410025231B /* ElevatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevatorCell.swift; sourceTree = "<group>"; };
@@ -117,6 +119,14 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		D01DEFB3223E6B9C002163BB /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				D01DEFB1223E5A7E002163BB /* TimerService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		D06FFB4E2235183A0025231B /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +178,7 @@
 		D09503E6223495A8000C0B62 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				D01DEFB3223E6B9C002163BB /* Service */,
 				D01DEFAC223E4CF1002163BB /* Managers */,
 				D06FFB53223539A90025231B /* Model */,
 				D09503E8223495C3000C0B62 /* Helper */,
@@ -212,12 +223,12 @@
 			children = (
 				D09504032234A5B6000C0B62 /* ElevatorViewController.swift */,
 				D09503FF2234A523000C0B62 /* ElevatorViewControllerBuilder.swift */,
+				D01DEFAF223E5333002163BB /* ElevatorViewInteractor.swift */,
 				D06FFB4A223511BD0025231B /* ElevatorViewModule.swift */,
 				D06FFB4C223511F10025231B /* ElevatorViewPresenter.swift */,
 				D01DEF9D223E379E002163BB /* ElevatorViewRouter.swift */,
 				D09504012234A5AC000C0B62 /* ElevatorViewController.xib */,
 				D06FFB4E2235183A0025231B /* Cell */,
-				D01DEFAF223E5333002163BB /* ElevatorViewInteractor.swift */,
 			);
 			path = Elevator;
 			sourceTree = "<group>";
@@ -306,6 +317,7 @@
 				D09504042234A5B6000C0B62 /* ElevatorViewController.swift in Sources */,
 				D09503EA223495D0000C0B62 /* NibLoader.swift in Sources */,
 				D01DEFA9223E451D002163BB /* FloorCell.swift in Sources */,
+				D01DEFB2223E5A7E002163BB /* TimerService.swift in Sources */,
 				D09503EE22349704000C0B62 /* RootRouter.swift in Sources */,
 				D09503FA22349C2F000C0B62 /* MainViewModule.swift in Sources */,
 				D06FFB55223539B20025231B /* Floor.swift in Sources */,

@@ -20,7 +20,6 @@ protocol ElevatorViewOutput {
     func getFloorCount() -> Int
     func getFloor(index: Int) -> Floor
     func selectRow(index: Int)
-    func invalidateTimer()
     func tapSelectFloor(from floorIndex: Int)
 }
 
@@ -34,4 +33,11 @@ protocol ElevatorViewInteractorInput {
     func getCurrentFloorIndex() -> Int
     func setSelectedFloor(index: Int)
     func getSelectedFloor() -> Int
+    
+    func setupNewTimerIfNeeded()
+    func invalidTimer()
+}
+
+protocol ElevatorViewInteractorOutput: class {
+    func didTimerTrigger()
 }

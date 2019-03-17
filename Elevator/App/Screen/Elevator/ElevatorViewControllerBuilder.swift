@@ -22,7 +22,7 @@ final class ElevatorViewControllerBuilder: ElevatorViewControllerBuildable {
         let router = ElevatorViewRouter()
         let interactor = ElevatorViewInteractor(
                                 floorCount: floor,
-                                elevatorManager: ElevatorManagerImplementation())
+                                elevatorManager: ElevatorManagerImplementation(timerService: TimerServiceImplementation()))
         
         viewController.output = presenter
         
@@ -31,6 +31,8 @@ final class ElevatorViewControllerBuilder: ElevatorViewControllerBuildable {
         presenter.interactor = interactor
         
         router.viewController = viewController
+        
+        interactor.output = presenter
         
         return viewController
     }

@@ -11,9 +11,12 @@ import Foundation
 final class ElevatorViewInteractor: ElevatorViewInteractorInput {
     private let elevatorManager: ElevatorManager
     
+    weak var output: ElevatorViewInteractorOutput?
+    
     init(floorCount: Int, elevatorManager: ElevatorManager) {
         self.elevatorManager = elevatorManager
         elevatorManager.setFloorCount(number: floorCount)
+        elevatorManager.add(subscriber: self)
     }
     
     func getFloorCount() -> Int {
@@ -34,5 +37,19 @@ final class ElevatorViewInteractor: ElevatorViewInteractorInput {
     
     func getSelectedFloor() -> Int {
         return elevatorManager.selectedFloorIndex
+    }
+    
+    func setupNewTimerIfNeeded() {
+        elevatorManager.setupTimerIfNeeded()
+    }
+    
+    func invalidTimer() {
+        elevatorManager.invalidTimer()
+    }
+}
+
+extension ElevatorViewInteractor: ElevatorManagerSubscribe {
+    func trigger() {
+        output?.didTimerTrigger()
     }
 }

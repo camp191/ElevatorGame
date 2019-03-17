@@ -13,9 +13,6 @@ final class ElevatorViewPresenter: ElevatorViewOutput {
     var router: ElevatorRouterInput?
     var interactor: ElevatorViewInteractorInput?
     
-    var timer = Timer()
-    var isTimerValidate = false
-    
     func viewIsReady() {
         view?.setFloorLabel(with: "\(interactor?.getCurrentFloorIndex() ?? 0 + 1)")
     }
@@ -48,11 +45,6 @@ final class ElevatorViewPresenter: ElevatorViewOutput {
         return IndexPath(row: floorCount - 1, section: 0)
     }
     
-    func invalidateTimer() {
-        timer.invalidate()
-        isTimerValidate = false
-    }
-    
     func selectRow(index: Int) {
         var indexPathsToReload: [IndexPath] = []
         indexPathsToReload.append(IndexPath(row: interactor?.getSelectedFloor() ?? 0, section: 0))
@@ -61,10 +53,10 @@ final class ElevatorViewPresenter: ElevatorViewOutput {
         indexPathsToReload.append(IndexPath(row: interactor?.getSelectedFloor() ?? 0, section: 0))
         
         view?.reloadTableViewRow(indexPaths: indexPathsToReload)
-        shouldSetupNewTimer()
+        interactor?.setupNewTimerIfNeeded()
     }
     
-    @objc func updateElevator() {
+    func updateElevator() {
         var indexPathsToReload: [IndexPath] = []
         
         indexPathsToReload.append(IndexPath(row: interactor?.getCurrentFloorIndex() ?? 0, section: 0))
@@ -81,7 +73,7 @@ final class ElevatorViewPresenter: ElevatorViewOutput {
         let currentElevatorFloorIndex = interactor?.getCurrentFloorIndex() ?? 0
         let selectedFloorIndex = interactor?.getSelectedFloor() ?? 0
         if currentElevatorFloorIndex == selectedFloorIndex {
-            invalidateTimer()
+            interactor?.invalidTimer()
         }
         else if currentElevatorFloorIndex > selectedFloorIndex {
             interactor?.setCurrentFloor(index: currentElevatorFloorIndex - 1)
@@ -90,15 +82,10 @@ final class ElevatorViewPresenter: ElevatorViewOutput {
             interactor?.setCurrentFloor(index: currentElevatorFloorIndex + 1)
         }
     }
-    
-    func shouldSetupNewTimer() {
-        if !isTimerValidate {
-            setupTimer()
-        }
-    }
-    
-    func setupTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateElevator), userInfo: nil, repeats: true)
-        isTimerValidate = true
+}
+
+extension ElevatorViewPresenter: ElevatorViewInteractorOutput {
+    func didTimerTrigger() {
+        updateElevator()
     }
 }
