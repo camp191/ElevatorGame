@@ -15,8 +15,15 @@ protocol MainViewInput: class {
 protocol MainViewOutput {
     func tapSelectFloor()
     func updateFloor(to number: String?)
+    func viewDidAppear()
 }
 
 protocol MainViewRouterInput {
-    func navigateToElevator(with floor: Int)
+    func navigateToElevator(with floor: Int, elavatorManager: ElevatorManager)
+}
+
+protocol MainViewInteractorInput {
+    func getManager() -> ElevatorManager
+    func invalidateTimer()
+    func resetElevatorManagerData()
 }

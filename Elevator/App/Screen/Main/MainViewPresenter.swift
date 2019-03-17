@@ -11,6 +11,7 @@ import UIKit
 final class MainViewPresenter: MainViewOutput {
     weak var view: MainViewInput?
     var router: MainViewRouterInput?
+    var interactor: MainViewInteractorInput?
     
     private var floorNumber: Int?
     
@@ -22,7 +23,8 @@ final class MainViewPresenter: MainViewOutput {
             view?.showAlert(alert)
             return
         }
-        router?.navigateToElevator(with: floorNumber)
+        guard let elevatorManager = interactor?.getManager() else { return }
+        router?.navigateToElevator(with: floorNumber, elavatorManager: elevatorManager)
     }
     
     func updateFloor(to number: String?) {
@@ -42,5 +44,10 @@ final class MainViewPresenter: MainViewOutput {
         }
         
         floorNumber = floor
+    }
+    
+    func viewDidAppear() {
+        interactor?.invalidateTimer()
+        interactor?.resetElevatorManagerData()
     }
 }

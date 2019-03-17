@@ -9,11 +9,11 @@
 import UIKit
 
 protocol ElevatorViewControllerBuildable {
-    func build(with floor: Int) -> UIViewController
+    func build(with floor: Int, elevatorManager: ElevatorManager) -> UIViewController
 }
 
 final class ElevatorViewControllerBuilder: ElevatorViewControllerBuildable {
-    func build(with floor: Int) -> UIViewController {
+    func build(with floor: Int, elevatorManager: ElevatorManager) -> UIViewController {
         guard let viewController = try? ElevatorViewController.loadFromNib() else {
             fatalError("Could not load nib")
         }
@@ -22,7 +22,7 @@ final class ElevatorViewControllerBuilder: ElevatorViewControllerBuildable {
         let router = ElevatorViewRouter()
         let interactor = ElevatorViewInteractor(
                                 floorCount: floor,
-                                elevatorManager: ElevatorManagerImplementation(timerService: TimerServiceImplementation()))
+                                elevatorManager: elevatorManager)
         
         viewController.output = presenter
         

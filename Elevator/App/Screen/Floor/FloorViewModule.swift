@@ -11,6 +11,7 @@ import Foundation
 protocol FloorViewInput: class {
     func setSelectedFloorToNavigationBar(floor: String)
     func setCurrentFloorToNavigationBar(floor: String)
+    func updateNewTimestampData(indexPath: IndexPath)
 }
 
 protocol FloorViewOutput {

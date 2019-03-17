@@ -42,7 +42,7 @@ extension FloorViewController: UITableViewDataSource {
 
 extension FloorViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 30
+        return 50
     }
 }
 
@@ -54,5 +54,13 @@ extension FloorViewController: FloorViewInput {
     func setSelectedFloorToNavigationBar(floor: String) {
         navigationItem.rightBarButtonItem = UIBarButtonItem()
         navigationItem.rightBarButtonItem?.title = floor
+    }
+    
+    func updateNewTimestampData(indexPath: IndexPath) {
+        DispatchQueue.main.async {
+            self.tableView.beginUpdates()
+            self.tableView.insertRows(at: [indexPath], with: .automatic)
+            self.tableView.endUpdates()
+        }
     }
 }

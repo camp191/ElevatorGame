@@ -9,22 +9,24 @@
 import UIKit
 
 protocol MainViewControllerBuildable {
-    func build() -> UIViewController
+    func build(elevatorManager: ElevatorManager) -> UIViewController
 }
 
 final class MainVerControllerBuilder: MainViewControllerBuildable {
-    func build() -> UIViewController {
+    func build(elevatorManager: ElevatorManager) -> UIViewController {
         guard let viewController = try? MainViewController.loadFromNib() else {
             fatalError("Could not load Main ViewController")
         }
         
         let presenter = MainViewPresenter()
         let router = MainViewRouter()
+        let interactor = MainViewInteractor(elevatorManager: elevatorManager)
         
         viewController.output = presenter
         
         presenter.router = router
         presenter.view = viewController
+        presenter.interactor = interactor
         
         router.viewController = viewController
         

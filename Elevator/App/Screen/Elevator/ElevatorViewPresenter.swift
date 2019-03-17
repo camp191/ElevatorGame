@@ -14,7 +14,7 @@ final class ElevatorViewPresenter: ElevatorViewOutput {
     var interactor: ElevatorViewInteractorInput?
     
     func viewIsReady() {
-        view?.setFloorLabel(with: "\(interactor?.getCurrentFloorIndex() ?? 0 + 1)")
+        view?.setFloorLabel(with: "\((interactor?.getCurrentFloorIndex() ?? 0) + 1)")
     }
     
     func tapSelectFloor(from floorIndex: Int) {
@@ -35,10 +35,6 @@ final class ElevatorViewPresenter: ElevatorViewOutput {
         let isSelected = index ==  selectedFloorIndex && selectedFloorIndex != currentFloorIndex
         
         return Floor(number: floorNumber, isSelected: isSelected, isArrived: isArrive)
-    }
-    
-    func getCurrentElevatorFloor() -> String {
-        return "\(interactor?.getCurrentFloorIndex() ?? 0)"
     }
     
     func getLastFloorIndexPath() -> IndexPath {
@@ -66,7 +62,7 @@ final class ElevatorViewPresenter: ElevatorViewOutput {
         
         indexPathsToReload.append(IndexPath(row: interactor?.getCurrentFloorIndex() ?? 0, section: 0))
         
-        view?.setFloorLabel(with: "\(interactor?.getCurrentFloorIndex() ?? 0 + 1)")
+        view?.setFloorLabel(with: "\((interactor?.getCurrentFloorIndex() ?? 0) + 1)")
         view?.reloadTableViewRow(indexPaths: indexPathsToReload)
     }
     

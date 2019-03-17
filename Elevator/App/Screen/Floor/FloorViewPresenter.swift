@@ -22,6 +22,7 @@ class FloorViewPresenter: FloorViewOutput {
     func viewIsReady() {
         view?.setSelectedFloorToNavigationBar(floor: "\(floor)")
         timestamps = interactor?.getSelectedFloorTimestamps(index: floor - 1) ?? []
+        setupCurrentFloorToNavigationBar()
     }
     
     func getTimestampCount() -> Int {
@@ -31,10 +32,20 @@ class FloorViewPresenter: FloorViewOutput {
     func getTimestamp(index: Int) -> TimeInterval {
         return timestamps[index]
     }
+    
+    func setupCurrentFloorToNavigationBar() {
+        view?.setCurrentFloorToNavigationBar(floor: "\((interactor?.getCurrentFloorIndex() ?? 0) + 1)")
+    }
 }
 
 extension FloorViewPresenter: FloorViewInteractorOutput {
     func didTimerTrigger() {
-        view?.setCurrentFloorToNavigationBar(floor: "\(interactor?.getCurrentFloorIndex() ?? 0 + 1)")
+        setupCurrentFloorToNavigationBar()
+        let newTimestamp = interactor?.getSelectedFloorTimestamps(index: floor - 1) ?? []
+        if timestamps.count != newTimestamp.count {
+            timestamps = newTimestamp
+            let newIndexPath = IndexPath(row: timestamps.count - 1, section: 0)
+            view?.updateNewTimestampData(indexPath: newIndexPath)
+        }
     }
 }

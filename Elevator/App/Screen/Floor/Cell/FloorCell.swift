@@ -14,6 +14,14 @@ final class FloorCell: UITableViewCell {
     
     func configure(index: Int, timeStamp: TimeInterval?) {
         lblNumber.text = "\(index + 1)"
-        lblTimestamp.text = "\(timeStamp)"
+        lblTimestamp.text = "\(getDate(timestamp: timeStamp ?? 0))"
+    }
+    
+    private func getDate(timestamp: TimeInterval) -> String {
+        let now = Date(timeIntervalSince1970: timestamp)
+        let formatter = DateFormatter()
+        formatter.timeZone = TimeZone.current
+        formatter.dateFormat = "yyyy-MM-dd HH:mm"
+        return formatter.string(from: now)
     }
 }

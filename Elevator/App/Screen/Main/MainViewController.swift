@@ -15,20 +15,16 @@ final class MainViewController: UIViewController, NibLoader {
     
     var output: MainViewOutput?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupUI()
-    }
-    
-    func setupUI() {
-        tfFloor.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        output?.viewDidAppear()
     }
     
     @IBAction func tapSelectFloor(_ sender: UIButton) {
         output?.tapSelectFloor()
     }
     
-    @objc func textFieldDidChange(_ textField: UITextField) {
+    @IBAction func textFieldDidChange(_ sender: UITextField) {
         output?.updateFloor(to: tfFloor.text)
     }
 }

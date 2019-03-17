@@ -14,7 +14,8 @@ protocol RootDispatcher {
 
 final class RootDispatcherImplementation: RootDispatcher {
     func mainFlow() -> UIViewController {
-        let mainViewController = MainVerControllerBuilder().build()
+        let mainViewController = MainVerControllerBuilder().build(
+                                        elevatorManager: ElevatorManagerImplementation(timerService: TimerServiceImplementation()))
         let navigationController = UINavigationController(
             rootViewController: mainViewController
         )

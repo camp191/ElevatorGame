@@ -19,6 +19,7 @@
 		D01DEFB0223E5333002163BB /* ElevatorViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01DEFAF223E5333002163BB /* ElevatorViewInteractor.swift */; };
 		D01DEFB2223E5A7E002163BB /* TimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01DEFB1223E5A7E002163BB /* TimerService.swift */; };
 		D01DEFB5223E6DCC002163BB /* FloorViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01DEFB4223E6DCC002163BB /* FloorViewInteractor.swift */; };
+		D01DEFB7223EADD7002163BB /* MainViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01DEFB6223EADD7002163BB /* MainViewInteractor.swift */; };
 		D06FFB4B223511BD0025231B /* ElevatorViewModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06FFB4A223511BD0025231B /* ElevatorViewModule.swift */; };
 		D06FFB4D223511F10025231B /* ElevatorViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06FFB4C223511F10025231B /* ElevatorViewPresenter.swift */; };
 		D06FFB50223518410025231B /* ElevatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06FFB4F223518410025231B /* ElevatorCell.swift */; };
@@ -55,6 +56,7 @@
 		D01DEFAF223E5333002163BB /* ElevatorViewInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevatorViewInteractor.swift; sourceTree = "<group>"; };
 		D01DEFB1223E5A7E002163BB /* TimerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerService.swift; sourceTree = "<group>"; };
 		D01DEFB4223E6DCC002163BB /* FloorViewInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorViewInteractor.swift; sourceTree = "<group>"; };
+		D01DEFB6223EADD7002163BB /* MainViewInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewInteractor.swift; sourceTree = "<group>"; };
 		D06FFB4A223511BD0025231B /* ElevatorViewModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevatorViewModule.swift; sourceTree = "<group>"; };
 		D06FFB4C223511F10025231B /* ElevatorViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevatorViewPresenter.swift; sourceTree = "<group>"; };
 		D06FFB4F223518410025231B /* ElevatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevatorCell.swift; sourceTree = "<group>"; };
@@ -94,13 +96,13 @@
 		D01DEF9A223E3779002163BB /* Floor */ = {
 			isa = PBXGroup;
 			children = (
-				D01DEFA7223E4514002163BB /* Cell */,
 				D01DEF9B223E3788002163BB /* FloorViewController.swift */,
 				D01DEFA3223E3961002163BB /* FloorViewControllerBuilder.swift */,
+				D01DEFB4223E6DCC002163BB /* FloorViewInteractor.swift */,
 				D01DEFA1223E3956002163BB /* FloorViewModule.swift */,
 				D01DEFA5223E3970002163BB /* FloorViewPresenter.swift */,
 				D01DEF9F223E390D002163BB /* FloorViewController.xib */,
-				D01DEFB4223E6DCC002163BB /* FloorViewInteractor.swift */,
+				D01DEFA7223E4514002163BB /* Cell */,
 			);
 			path = Floor;
 			sourceTree = "<group>";
@@ -213,6 +215,7 @@
 			children = (
 				D09503F22234985B000C0B62 /* MainViewController.swift */,
 				D09503F022349818000C0B62 /* MainViewControllerBuilder.swift */,
+				D01DEFB6223EADD7002163BB /* MainViewInteractor.swift */,
 				D09503F922349C2F000C0B62 /* MainViewModule.swift */,
 				D09503FB22349D2B000C0B62 /* MainViewPresenter.swift */,
 				D09503FD22349D33000C0B62 /* MainViewRouter.swift */,
@@ -336,6 +339,7 @@
 				D01DEFA4223E3961002163BB /* FloorViewControllerBuilder.swift in Sources */,
 				D06FFB4D223511F10025231B /* ElevatorViewPresenter.swift in Sources */,
 				D01DEFB5223E6DCC002163BB /* FloorViewInteractor.swift in Sources */,
+				D01DEFB7223EADD7002163BB /* MainViewInteractor.swift in Sources */,
 				D01DEFB0223E5333002163BB /* ElevatorViewInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

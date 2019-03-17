@@ -41,11 +41,9 @@ final class TimerServiceImplementation: TimerService {
     }
     
     func setupTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(triggerTimer), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (timer) in
+            self.delegate?.trigger()
+        })
         isTimerValidate = true
-    }
-    
-    @objc func triggerTimer() {
-        delegate?.trigger()
     }
 }

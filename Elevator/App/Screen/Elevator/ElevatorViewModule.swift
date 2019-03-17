@@ -15,7 +15,6 @@ protocol ElevatorViewInput: class {
 
 protocol ElevatorViewOutput {
     func viewIsReady()
-    func getCurrentElevatorFloor() -> String
     func getLastFloorIndexPath() -> IndexPath
     func getFloorCount() -> Int
     func getFloor(index: Int) -> Floor

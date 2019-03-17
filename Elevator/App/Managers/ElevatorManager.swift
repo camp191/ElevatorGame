@@ -23,6 +23,8 @@ protocol ElevatorManager {
     
     func setupTimerIfNeeded()
     func invalidTimer()
+    
+    func resetManagerData()
 }
 
 protocol ElevatorManagerSubscribe: class {
@@ -61,6 +63,7 @@ final class ElevatorManagerImplementation: ElevatorManager {
     
     func setCurrentFloor(index: Int) {
         currentElevatorFloorIndex = index
+        setNewFloorTimeStampIfNeeded(index: index)
     }
     
     func setSelectedFloor(index: Int) {
@@ -73,6 +76,24 @@ final class ElevatorManagerImplementation: ElevatorManager {
     
     func invalidTimer() {
         timerService.invalidateTimer()
+    }
+    
+    func resetManagerData() {
+        floors = 0
+        currentElevatorFloorIndex = 0
+        selectedFloorIndex = 0
+        floorTimeStampFromIndex = [:]
+    }
+    
+    private func setNewFloorTimeStampIfNeeded(index: Int) {
+        if currentElevatorFloorIndex == selectedFloorIndex {
+            let timeStamp = Date().timeIntervalSince1970
+            if floorTimeStampFromIndex[index] == nil {
+                floorTimeStampFromIndex[index] = [timeStamp]
+            } else {
+                floorTimeStampFromIndex[index]?.append(timeStamp)
+            }
+        }
     }
 }
 
