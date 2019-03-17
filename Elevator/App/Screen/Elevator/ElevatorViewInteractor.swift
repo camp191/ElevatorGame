@@ -46,6 +46,10 @@ final class ElevatorViewInteractor: ElevatorViewInteractorInput {
     func invalidTimer() {
         elevatorManager.invalidTimer()
     }
+    
+    func getManager() -> ElevatorManager {
+        return elevatorManager
+    }
 }
 
 extension ElevatorViewInteractor: ElevatorManagerSubscribe {

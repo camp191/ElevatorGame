@@ -9,9 +9,21 @@
 import Foundation
 
 protocol FloorViewInput: class {
+    func setSelectedFloorToNavigationBar(floor: String)
     func setCurrentFloorToNavigationBar(floor: String)
 }
 
 protocol FloorViewOutput {
     func viewIsReady()
+    func getTimestampCount() -> Int
+    func getTimestamp(index: Int) -> TimeInterval
+}
+
+protocol FloorViewInteractorInput {
+    func getCurrentFloorIndex() -> Int
+    func getSelectedFloorTimestamps(index: Int) -> [TimeInterval]
+}
+
+protocol FloorViewInteractorOutput: class {
+    func didTimerTrigger()
 }

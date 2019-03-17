@@ -12,7 +12,8 @@ final class FloorCell: UITableViewCell {
     @IBOutlet weak var lblNumber: UILabel!
     @IBOutlet weak var lblTimestamp: UILabel!
     
-    func configure() {
-        
+    func configure(index: Int, timeStamp: TimeInterval?) {
+        lblNumber.text = "\(index + 1)"
+        lblTimestamp.text = "\(timeStamp)"
     }
 }

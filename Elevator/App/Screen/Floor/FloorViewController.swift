@@ -31,11 +31,12 @@ final class FloorViewController: UIViewController, NibLoader {
 extension FloorViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: FloorCell.self), for: indexPath) as! FloorCell
+        cell.configure(index: indexPath.row, timeStamp: output?.getTimestamp(index: indexPath.row))
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return output?.getTimestampCount() ?? 0
     }
 }
 
@@ -47,6 +48,10 @@ extension FloorViewController: UITableViewDelegate {
 
 extension FloorViewController: FloorViewInput {
     func setCurrentFloorToNavigationBar(floor: String) {
+        navigationItem.title = floor
+    }
+    
+    func setSelectedFloorToNavigationBar(floor: String) {
         navigationItem.rightBarButtonItem = UIBarButtonItem()
         navigationItem.rightBarButtonItem?.title = floor
     }

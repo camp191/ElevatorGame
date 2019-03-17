@@ -18,7 +18,8 @@ final class ElevatorViewPresenter: ElevatorViewOutput {
     }
     
     func tapSelectFloor(from floorIndex: Int) {
-        router?.navigate(to: floorIndex)
+        guard let interactor = interactor else { return }
+        router?.navigate(to: floorIndex, elevatorManager: interactor.getManager())
     }
     
     func getFloorCount() -> Int {

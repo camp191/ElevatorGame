@@ -17,8 +17,8 @@ final class ElevatorViewRouter: ElevatorRouterInput {
         self.elevatorBuilder = elevatorBuilder
     }
     
-    func navigate(to floor: Int) {
-        let floorVC = FloorViewControlerBuilder().build(floor: floor)
+    func navigate(to floor: Int, elevatorManager: ElevatorManager) {
+        let floorVC = FloorViewControlerBuilder().build(floor: floor, elevatorManager: elevatorManager)
         viewController?.navigationController?.pushViewController(floorVC, animated: true)
     }
 }

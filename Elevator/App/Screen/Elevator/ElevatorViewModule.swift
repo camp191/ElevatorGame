@@ -24,7 +24,7 @@ protocol ElevatorViewOutput {
 }
 
 protocol ElevatorRouterInput {
-    func navigate(to floor: Int)
+    func navigate(to floor: Int, elevatorManager: ElevatorManager)
 }
 
 protocol ElevatorViewInteractorInput {
@@ -36,6 +36,8 @@ protocol ElevatorViewInteractorInput {
     
     func setupNewTimerIfNeeded()
     func invalidTimer()
+    
+    func getManager() -> ElevatorManager
 }
 
 protocol ElevatorViewInteractorOutput: class {
