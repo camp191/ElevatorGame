@@ -8,7 +8,7 @@
 
 import Foundation
 
-class FloorViewPresenter: FloorViewOutput {
+final class FloorViewPresenter: FloorViewOutput {
     weak var view: FloorViewInput?
     var interactor: FloorViewInteractorInput?
     
