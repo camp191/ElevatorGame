@@ -83,6 +83,7 @@ final class ElevatorManagerImplementation: ElevatorManager {
         currentElevatorFloorIndex = 0
         selectedFloorIndex = 0
         floorTimeStampFromIndex = [:]
+        subscribers.removeAll()
     }
     
     private func setNewFloorTimeStampIfNeeded(index: Int) {
